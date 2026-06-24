@@ -1,0 +1,9 @@
+// TransformedData テーブルの更新ポリシー設定
+.alter table TransformedData policy update
+[{
+    "IsEnabled": true,
+    "Source": "RawData",
+    "Query": "TransformRawData()",
+    "IsTransactional": false,
+    "PropagateIngestionProperties": false
+}]

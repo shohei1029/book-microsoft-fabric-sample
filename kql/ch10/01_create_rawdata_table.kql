@@ -1,0 +1,11 @@
+// Bronze: RawData テーブルの定義とフォルダー設定
+.alter table RawData (
+    BikepointID:string,
+    Street:string,
+    Neighbourhood:string,
+    Latitude:real,
+    Longitude:real,
+    No_Bikes:long,
+    No_Empty_Docks:long,
+    Timestamp:datetime
+) with (folder="Bronze")

@@ -1,0 +1,6 @@
+// Gold: AggregatedData マテリアライズド・ビュー作成
+.create-or-alter materialized-view with (folder="Gold") AggregatedData on table TransformedData
+{
+   TransformedData
+   | summarize arg_max(Timestamp, No_Bikes) by BikepointID
+}
