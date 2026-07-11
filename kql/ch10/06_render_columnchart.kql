@@ -1,0 +1,4 @@
+// AggregatedData の可視化（カラムチャート）
+AggregatedData
+| sort by BikepointID
+| render columnchart with (ycolumns=No_Bikes, xcolumn=BikepointID)

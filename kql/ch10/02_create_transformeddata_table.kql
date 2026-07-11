@@ -1,0 +1,13 @@
+// Silver: TransformedData テーブルの作成とフォルダー設定
+.create table TransformedData (
+    BikepointID:int,
+    Street:string,
+    Neighbourhood:string,
+    Latitude:real,
+    Longitude:real,
+    No_Bikes:long,
+    No_Empty_Docks:long,
+    Timestamp:datetime,
+    BikesToBeFilled:long,
+    Action:string
+) with (folder="Silver")
