@@ -1,0 +1,23 @@
+## 用途
+在庫・出荷分析用のLakehouseです。
+
+## 主要テーブル
+- fact_inventory_snapshot: 月末在庫スナップショット（1行=1倉庫x1部材x1月末）
+- fact_shipments: 出荷ファクト（1行=1出荷明細）
+- dim_warehouse / dim_product / dim_material / dim_date: マスタ
+
+## JOIN ルール
+- 在庫→部材: fact_inventory_snapshot.material_id = dim_material.material_id
+- 在庫→倉庫: fact_inventory_snapshot.warehouse_id = dim_warehouse.warehouse_id
+- 出荷→製品: fact_shipments.product_id = dim_product.product_id
+- 日付結合: snapshot_date_key / shipment_date_key = dim_date.date_key
+
+## リーディングワード
+- 材料名の部分一致は LOWER(material_name) LIKE '%<keyword>%' で書くこと
+- 日付の月集計は FORMAT(shipment_date, 'yyyy-MM') = '<yyyy-MM>' で書くこと
+- 直近Nか月の集計は shipment_date >= DATEADD(MONTH, -N, GETDATE()) で書くこと
+
+## 典型値
+- warehouse_id: 'W-01' 形式の文字列
+- product_id: 'FG-0001' 形式の文字列（FG=完成品）
+- is_on_time, is_in_full: bit型（1=true, 0=false）
